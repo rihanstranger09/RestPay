@@ -20,15 +20,40 @@ Requires Node.js 20 or later.
 
 ```bash
 npm install
+npm run seed
 npm run dev
 ```
 
-Open **http://localhost:3000**. No credentials are required for the demo. The app starts in a clearly labelled **checkout simulator** with seeded sandbox receipts.
+Open **http://localhost:3000**. No credentials are required for the simulator demo. The app starts with a default mandate and three seeded sandbox receipts.
+
+`npm run seed` creates the gitignored `data/restpay.json` ledger. The app also auto-seeds when that file is absent. To reset a used demo, **stop the server**, run `npm run seed`, then restart; this replaces the ledger with the original three receipts.
+
+### Run one sample purchase from the command line
+
+With the server running, open a second terminal:
 
 ```bash
-npm run check   # TypeScript validation + 17 automated tests
+npm run demo:purchase
+```
+
+This command asks the running app for the $42.80 weekly grocery basket and prints every policy check. In simulator mode it also completes the simulated PayPal approval/capture and prints the receipt and capture IDs. With real sandbox credentials it creates a PayPal order and prints the hosted buyer-approval URL. Set `DEMO_BASE_URL` if the server is not at `http://localhost:3000`.
+
+```bash
+npm run check   # TypeScript validation + 18 automated tests
 npm start       # Run without the file watcher
 ```
+
+## Key demo scenarios
+
+Use the default mandate for all three required paths:
+
+| Scenario | Request to run | Expected result |
+| --- | --- | --- |
+| **Within the limit** | `Buy my weekly grocery basket` | **Allowed.** The $42.80 purchase passes all five checks and proceeds to PayPal. The sample CLI completes it automatically in simulator mode. |
+| **Over the approval threshold** | `Buy the modern cookbook collection` | **Needs approval.** The $58 book crosses the $50 threshold and waits in **Waiting on you**. No PayPal order exists until a human approves. |
+| **Policy rejects the purchase** | `Buy the studio wireless headphones` | **Blocked.** Electronics are outside the groceries-and-books allowlist. No PayPal order is created, and the receipt identifies the violated rule. |
+
+Optional fourth scenario: `Start my specialty coffee subscription` is blocked by the no-new-subscriptions rule.
 
 ## Connect real PayPal sandbox checkout
 
@@ -55,6 +80,8 @@ PAYPAL_CLIENT_SECRET=your_sandbox_secret
 PAYPAL_ENVIRONMENT=sandbox
 APP_BASE_URL=http://localhost:3000
 ```
+
+Set these values in the hosting provider's environment-variable settings or in the local `.env` file loaded by `dotenv`. `.env` and `.env.local` are gitignored; only the blank `.env.example` template is committed. Never put real credentials in source files, screenshots, demo recordings, or Git history.
 
 If you are using a hosted preview, set `APP_BASE_URL` to that preview's public HTTPS origin instead, with no trailing slash. PayPal must be able to send the buyer back to `/paypal/return` and `/paypal/cancel` on that same origin.
 

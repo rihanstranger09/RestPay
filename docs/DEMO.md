@@ -32,4 +32,4 @@ Open the audit trail.
 
 ## Recovery
 
-The app reserves pending purchases against budget, so repeated demos intentionally affect later outcomes. To restore the original seed data, stop the server, delete the gitignored `data/restpay.json`, and restart. Never do this during an active PayPal checkout.
+The app reserves pending purchases against budget, so repeated demos intentionally affect later outcomes. To restore the original seed data, stop the server, run `npm run seed`, and restart. Never do this during an active PayPal checkout.
