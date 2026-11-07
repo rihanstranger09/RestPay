@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="RestPay gives AI shopping agents clear spending mandates, deterministic enforcement, and explainable PayPal receipts." />
+    <meta name="theme-color" content="#173f2d" />
+    <title>RestPay — Your agent. Your rules.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <svg class="svg-sprite" aria-hidden="true">
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.3c0 4.6 3.1 8.4 7.5 9.7 4.4-1.3 7.5-5.1 7.5-9.7V6L12 3Z"/><path d="m8.8 12 2.1 2.1 4.5-4.5"/></symbol>
+      <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5"/><rect x="14" y="14" width="6" height="6" rx="1.5"/></symbol>
+      <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3Z"/><path d="M9 8h6M9 12h6M9 16h3"/></symbol>
+      <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v16H6.5A2.5 2.5 0 0 0 4 21.5v-16ZM20 5.5A2.5 2.5 0 0 0 17.5 3H13v16h4.5a2.5 2.5 0 0 1 2.5 2.5v-16Z"/></symbol>
+      <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1a1.7 1.7 0 0 0 1.9.3A1.7 1.7 0 0 0 10 3v-.2h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z"/></symbol>
+      <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="m12 3 1.4 4.1L17.5 8.5l-4.1 1.4L12 14l-1.4-4.1-4.1-1.4 4.1-1.4L12 3ZM19 14l.8 2.2L22 17l-2.2.8L19 20l-.8-2.2L16 17l2.2-.8L19 14ZM5 14l.7 1.8 1.8.7-1.8.7L5 19l-.7-1.8-1.8-.7 1.8-.7L5 14Z"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></symbol>
+      <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4H18v16H6a2 2 0 0 1-2-2V6.5Z"/><path d="M4 8h14M14 12h7v5h-7a2.5 2.5 0 0 1 0-5Z"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M5 20h14"/></symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+      <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></symbol>
+      <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h3M11 17h9"/><circle cx="16" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol>
+    </svg>
+
+    <aside class="sidebar">
+      <a class="brand" href="#overview" aria-label="RestPay home">
+        <span class="brand-mark"><svg><use href="#i-shield" /></svg></span>
+        <span>restpay<span class="brand-dot">.</span></span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="nav-link active" href="#overview"><svg><use href="#i-grid" /></svg>Overview</a>
+        <a class="nav-link" href="#agent"><svg><use href="#i-sparkles" /></svg>Shopping agent</a>
+        <a class="nav-link" href="#activity"><svg><use href="#i-receipt" /></svg>Audit trail</a>
+        <a class="nav-link" href="#mandate"><svg><use href="#i-sliders" /></svg>My mandate</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="protection-card">
+          <span class="protection-icon"><svg><use href="#i-lock" /></svg></span>
+          <strong>Protection is on</strong>
+          <p>Every payment is checked before PayPal.</p>
+          <span class="protection-status"><i></i> Deterministic guardrail</span>
+        </div>
+        <div class="profile">
+          <span class="avatar">AM</span>
+          <span><strong>Alex Morgan</strong><small>Personal workspace</small></span>
+          <svg><use href="#i-chevron" /></svg>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main" id="overview">
+      <header class="topbar">
+        <a class="mobile-brand brand" href="#overview"><span class="brand-mark"><svg><use href="#i-shield" /></svg></span>restpay.</a>
+        <div class="breadcrumb"><span>Workspace</span><svg><use href="#i-chevron" /></svg><strong>Overview</strong></div>
+        <div class="topbar-actions">
+          <span class="environment-pill"><i></i><span id="environment-label">PayPal Sandbox</span></span>
+          <button class="icon-button" id="export-button" title="Export audit trail" aria-label="Export audit trail"><svg><use href="#i-download" /></svg></button>
+          <span class="top-avatar">AM</span>
+        </div>
+      </header>
+
+      <div class="content">
+        <section class="page-heading">
+          <div>
+            <p class="eyebrow">YOUR MONEY. YOUR MANDATE.</p>
+            <h1>Good morning, Alex.</h1>
+            <p>Your agent is ready to shop—with boundaries only you can set.</p>
+          </div>
+          <a href="#activity" class="button button-secondary desktop-only">View audit trail <svg><use href="#i-arrow" /></svg></a>
+        </section>
+
+        <section class="stats-grid" aria-label="Spending overview">
+          <article class="stat-card stat-primary">
+            <div class="stat-label"><span>Groceries this month</span><svg><use href="#i-wallet" /></svg></div>
+            <div class="stat-value" id="spent-value">—</div>
+            <div class="budget-track"><span id="budget-progress"></span></div>
+            <p id="budget-caption">Loading budget…</p>
+          </article>
+          <article class="stat-card">
+            <div class="stat-label"><span>Available to delegate</span><span class="stat-icon mint"><svg><use href="#i-shield" /></svg></span></div>
+            <div class="stat-value" id="remaining-value">—</div>
+            <p id="reserved-caption">Including active reservations</p>
+          </article>
+          <article class="stat-card">
+            <div class="stat-label"><span>Needs your review</span><span class="stat-icon amber"><svg><use href="#i-clock" /></svg></span></div>
+            <div class="stat-value" id="approval-value">—</div>
+            <p id="approval-caption">No action needed</p>
+          </article>
+          <article class="stat-card">
+            <div class="stat-label"><span>Blocked by your rules</span><span class="stat-icon rose"><svg><use href="#i-lock" /></svg></span></div>
+            <div class="stat-value" id="blocked-value">—</div>
+            <p>Zero unauthorized PayPal calls</p>
+          </article>
+        </section>
+
+        <section class="workspace-grid">
+          <div class="workspace-main">
+            <article class="card agent-card" id="agent">
+              <div class="card-header">
+                <div><span class="section-kicker"><i class="live-dot"></i> AGENT WORKSPACE</span><h2>What can I get for you?</h2></div>
+                <span class="model-pill"><svg><use href="#i-sparkles" /></svg><span id="agent-model">Policy-gated agent</span></span>
+              </div>
+              <form id="agent-form" class="agent-form">
+                <svg class="prompt-sparkle"><use href="#i-sparkles" /></svg>
+                <input id="agent-input" name="request" autocomplete="off" maxlength="500" value="Buy my weekly grocery basket" aria-label="Shopping request" placeholder="Ask your agent to buy something…" />
+                <button class="button button-dark" id="run-agent" type="submit"><span>Run agent</span><svg><use href="#i-arrow" /></svg></button>
+              </form>
+              <div class="prompt-suggestions">
+                <span>Try a scenario</span>
+                <button data-prompt="Buy the modern cookbook collection">Needs approval</button>
+                <button data-prompt="Buy the studio wireless headphones">Breaks a rule</button>
+                <button data-prompt="Start my specialty coffee subscription">Subscription</button>
+              </div>
+              <div class="agent-flow" aria-label="Agent payment flow">
+                <div class="flow-step"><span>1</span><div><strong>Understand</strong><small>Agent plans the purchase</small></div></div>
+                <i></i>
+                <div class="flow-step"><span>2</span><div><strong>Check</strong><small>Rules decide deterministically</small></div></div>
+                <i></i>
+                <div class="flow-step"><span>3</span><div><strong>Pay</strong><small>PayPal only if permitted</small></div></div>
+              </div>
+            </article>
+
+            <section class="catalog-section">
+              <div class="section-heading"><div><p class="eyebrow">VERIFIED DEMO CATALOG</p><h2>Pick a purchase to delegate</h2></div><span>Server-verified prices <svg><use href="#i-lock" /></svg></span></div>
+              <div class="catalog-grid" id="catalog-grid"><div class="loading-state">Loading catalog…</div></div>
+            </section>
+          </div>
+
+          <aside class="workspace-side">
+            <article class="card mandate-card" id="mandate">
+              <div class="card-header compact">
+                <div><span class="section-kicker">YOUR SPENDING MANDATE</span><h2>Say it in plain English.</h2></div>
+                <span class="active-badge"><i></i> Active</span>
+              </div>
+              <p class="card-description">Your words become enforceable rules. The agent never interprets them at checkout.</p>
+              <form id="policy-form">
+                <textarea id="policy-input" maxlength="2000" aria-label="Plain-language spending mandate" rows="5"></textarea>
+                <div class="compiler-meta"><span id="compiler-source"><svg><use href="#i-info" /></svg> Local rule compiler</span><span>Validated before activation</span></div>
+                <button type="submit" class="button button-primary full-width" id="compile-policy"><svg><use href="#i-sparkles" /></svg> Compile & activate rules</button>
+              </form>
+              <div class="rules-header"><strong>Enforced rules</strong><span id="rule-count">0 checks</span></div>
+              <div class="rules-list" id="rules-list"></div>
+              <div class="fail-closed"><svg><use href="#i-lock" /></svg><p><strong>Fail closed by design.</strong><br />No matching mandate means no payment.</p></div>
+            </article>
+
+            <article class="card approvals-card">
+              <div class="card-header compact"><div><span class="section-kicker">HUMAN IN THE LOOP</span><h2>Waiting on you</h2></div><span class="count-badge" id="approval-count">0</span></div>
+              <div id="approvals-list" class="approvals-list"></div>
+            </article>
+          </aside>
+        </section>
+
+        <section class="card activity-card" id="activity">
+          <div class="card-header activity-header">
+            <div><span class="section-kicker">EXPLAINABLE BY DEFAULT</span><h2>Every decision leaves a receipt.</h2></div>
+            <div class="activity-actions">
+              <div class="filter-tabs" role="tablist" aria-label="Filter transactions">
+                <button class="active" data-filter="all">All</button>
+                <button data-filter="completed">Paid</button>
+                <button data-filter="pending_approval">Review</button>
+                <button data-filter="blocked">Blocked</button>
+              </div>
+              <button class="icon-button bordered" id="activity-export" aria-label="Download audit trail"><svg><use href="#i-download" /></svg></button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Purchase</th><th>Decision</th><th>Policy explanation</th><th>Amount</th><th>Reference</th><th></th></tr></thead>
+              <tbody id="activity-body"></tbody>
+            </table>
+          </div>
+          <div class="activity-footer"><span><svg><use href="#i-shield" /></svg> Policy snapshots are stored with every transaction</span><button id="view-all">View all activity <svg><use href="#i-arrow" /></svg></button></div>
+        </section>
+
+        <footer class="page-footer"><span><span class="brand-mark small"><svg><use href="#i-shield" /></svg></span> RestPay</span><p>AI proposes. Rules decide. You stay in control.</p><span>Sandbox prototype · No real money</span></footer>
+      </div>
+    </main>
+
+    <div class="modal-backdrop" id="decision-modal" hidden>
+      <section class="decision-dialog" role="dialog" aria-modal="true" aria-labelledby="decision-title">
+        <button class="modal-close icon-button" id="modal-close" aria-label="Close dialog"><svg><use href="#i-x" /></svg></button>
+        <div id="decision-content"></div>
+      </section>
+    </div>
+    <div class="toast-region" id="toast-region" aria-live="polite"></div>
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
