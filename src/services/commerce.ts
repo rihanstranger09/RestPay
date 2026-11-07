@@ -177,13 +177,13 @@ export class CommerceService {
   }
 
   async capture(id: string): Promise<Transaction> {
-    const transaction = required(this.store.getTransaction(id));
-    if (transaction.status !== "awaiting_payment") {
-      throw new HttpError(409, `Cannot capture a ${transaction.status} transaction.`);
-    }
-    await this.store.updateTransaction(id, (item) => {
+    const transaction = await this.store.compareAndSet(id, "awaiting_payment", (item) => {
       item.status = "processing";
     });
+    if (!transaction) {
+      const current = required(this.store.getTransaction(id));
+      throw new HttpError(409, `Cannot capture a ${current.status} transaction.`);
+    }
 
     // Last line of defence: policy and budget are checked again before capture.
     const evaluation = evaluatePolicy(

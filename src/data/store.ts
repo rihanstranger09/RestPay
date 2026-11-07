@@ -138,6 +138,23 @@ export class Store {
     return structuredClone(transaction);
   }
 
+  /**
+   * Atomically claim a transaction in the expected state. The check and mutation
+   * deliberately happen before the first await, so concurrent callers cannot both succeed.
+   */
+  async compareAndSet(
+    id: string,
+    expectedStatus: Transaction["status"],
+    update: (transaction: Transaction) => void,
+  ): Promise<Transaction | null> {
+    const transaction = this.state.transactions.find((item) => item.id === id);
+    if (!transaction || transaction.status !== expectedStatus) return null;
+    update(transaction);
+    transaction.updatedAt = new Date().toISOString();
+    await this.persist();
+    return structuredClone(transaction);
+  }
+
   getSpendingContext(purchase: Purchase, excludeTransactionId?: string): SpendingContext {
     const current = this.state.transactions.filter(
       (transaction) =>
